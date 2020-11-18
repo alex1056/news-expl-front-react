@@ -1,0 +1,17 @@
+.sandwich {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  background: url('../../../images/sandwich-icon.svg');
+  background-size: cover;
+  /* transition: background .2s; */
+  cursor: pointer;
+  margin: auto 0;
+}
+
+.sandwich_black {
+  background: url('../../../images/sandwich-icon-black.svg');
+}
+
+
+

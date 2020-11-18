@@ -1,0 +1,132 @@
+.header {
+  width: 100%;
+  background-color: aqua;
+  height: 80px;
+  display: flex;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    border-bottom: 1px solid rgb(196, 196, 196, 0.4);
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .header {
+    height: 66px;
+    border-bottom: 1px solid rgb(196, 196, 196, 0.4);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    height: 56px;
+    border-bottom: none;
+  }
+}
+
+.header__container {
+  width: 100%;
+  /* background-color: aqua; */
+  max-width: 1232px;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 2;
+  border-bottom: none;
+  box-sizing: border-box;
+  padding-right: 0;
+  padding-left: 0;
+  /* position: absolute; */
+}
+
+@media screen and (max-width: 1439px) {
+  .header__container {
+    width: calc(100% - 80px);
+    max-width: 1232px;
+    /* padding-right: 40px;
+        padding-left: 40px; */
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header__container {
+    /* width: calc(100% - 32px); */
+    /* max-width: 1232px; */
+    width: 100%;
+    height: 56px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border-bottom: 1px solid rgb(196, 196, 196, 0.4);
+  }
+}
+
+.header__mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  display: none;
+  z-index: 2;
+}
+
+.header__mobile-menu_enabled {
+  display: none;
+}
+
+@media screen and (max-width: 1439px) {
+  .header__mobile-menu_enabled {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header__mobile-menu_enabled {
+    display: flex;
+  }
+}
+
+.header__mobile-menu-back {
+  width: 100%;
+  background: #1a1b22;
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  justify-items: flex-start;
+  flex-direction: column;
+  height: 286px;
+  color: white;
+  /* padding-right: 16px;
+  padding-left: 16px;
+  padding-bottom: 24px; */
+}
+
+.header__mobile-menu-back_no-authorized {
+  height: 210px;
+}
+
+.header__menu-nav {
+  display: flex;
+  /* width: 100%; */
+}
+
+@media screen and (max-width: 1440px) {
+  .header__menu-nav {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header__menu-nav {
+    display: none;
+  }
+}
