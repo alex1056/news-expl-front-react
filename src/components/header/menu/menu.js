@@ -7,7 +7,7 @@ function Menu() {
   return ( 
             <ul className={styles['header__menu']}>
               <li className={styles['header__menu-item']}>
-              <NavLink to="/" activeClassName={styles['header__menu-item_selected']} className={cn(styles.link, styles['header-link'])}  id="indexpagelink"
+              <NavLink to="/" activeClassName={styles['header__menu-item_selected']} className={cn(styles.link, styles['header__link'])}  id="indexpagelink"
                   >Главная</NavLink> 
               </li>
               <li
@@ -17,7 +17,7 @@ function Menu() {
               </li>
               <li 
               className={cn(styles['header__menu-item'], styles['auth-btn'], styles['header__auth-btn'])} >
-                <Link to="#" className={cn(styles.link, styles['header-link'])}>
+                <Link to="#" className={cn(styles.link, styles['header__link'])}>
                   <p className={styles['auth-btn__name-text']}> Авторизоваться</p>
                   <div
                     className={cn(styles['auth-btn__logout-icon'], styles['auth-btn__logout-icon_theme_white'])}

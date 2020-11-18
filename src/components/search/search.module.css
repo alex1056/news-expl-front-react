@@ -1,0 +1,226 @@
+.search {
+  width: 100%;
+  height: 576px;
+  background: url('../../images/image-search.png');
+  background-size: cover;
+  /* display: flex; */
+  display: block;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1439px) {
+  .search {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .search {
+    height: 536px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .search {
+    height: 536px;
+  }
+}
+
+.search__container {
+  width: 608px;
+  /* background-color: blue; */
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 86px;
+}
+
+@media screen and (max-width: 1280px) {
+  .search__container {
+    width: 452px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .search__container {
+    padding-top: 86px;
+    justify-content: space-between;
+    padding-right: 16px;
+    padding-left: 16px;
+    width: calc(100% - 32px);
+    max-width: 452px;
+  }
+}
+
+.search__button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1439px) {
+  .search__button {
+    height: 56px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .button.search__button {
+    position: static;
+    margin-top: 16px;
+    width: 100%;
+  }
+}
+
+.content-title {
+  font-family: 'Roboto Slab', Georgia, Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 64px;
+  text-align: left;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+.content-title.search__content-title {
+  font-family: 'Roboto Slab', Georgia, Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 64px;
+  text-align: left;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 1439px) {
+  .content-title.search__content-title {
+    font-size: 36px;
+    line-height: 40px;
+    max-width: 385px;
+  }
+}
+
+.search__form {
+  width: 100%;
+  font-family: 'Roboto', Verdana, 'Geneva CY', 'San-serif';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #b6bcbf;
+  position: relative;
+  margin-top: 64px;
+  margin-bottom: 80px;
+}
+
+@media screen and (max-width: 1439px) {
+  .search__form {
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .search__form {
+    margin-bottom: 32px;
+    position: static;
+  }
+}
+
+.search__input {
+  width: 100%;
+  height: 64px;
+  background: #ffffff;
+  border: 1px solid #d1d2d6;
+  box-sizing: border-box;
+  backdrop-filter: blur(8px);
+  border-radius: 100px;
+  font-family: inherit;
+  padding-left: 24px;
+  padding-top: 21px;
+  padding-bottom: 21px;
+  -webkit-box-shadow: inset 0 0 0 50px #fff;
+  /* -webkit-text-fill-color: #000; */
+  /* box-shadow: none; */
+}
+.search__input::placeholder {
+  color: #b6bcbf;
+}
+
+.search__input:focus {
+  outline: 1px solid rgba(209, 210, 214, 0);
+  color: #1a1b22;
+  box-shadow: inset 0 0 5px rgba(47, 113, 229, 0.5);
+}
+
+@media screen and (max-width: 1439px) {
+  .search__input {
+    height: 56px;
+  }
+}
+
+.text.search__text {
+  padding: 0;
+  margin: 0;
+  padding-top: 32px;
+  color: white;
+}
+
+@media screen and (max-width: 1439px) {
+  .text.search__text {
+    padding-top: 16px;
+  }
+}
+
+.search__title-subtitle-cont {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  font-family: 'Roboto', Verdana, 'Geneva CY', 'San-serif';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: left;
+  /* color: #FFFFFF; */
+  margin: 0;
+  padding: 0;
+}
+
+.button {
+  width: 168px;
+  height: 64px;
+  color: white;
+  cursor: pointer;
+  border: none;
+  background: #2f71e5;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  border-radius: 100px;
+  box-sizing: border-box;
+  font-family: 'Roboto', Verdana, 'Geneva CY', 'San-serif';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: #347eff;
+  outline: none;
+  transition: background 0.2s;
+}
+
+.button:focus {
+  background: #2a65cc;
+  outline: none;
+  transition: background 0.2s;
+}
