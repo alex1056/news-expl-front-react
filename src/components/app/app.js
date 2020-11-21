@@ -5,6 +5,7 @@ import NotFound from '../not-found';
 import Preloader from '../preloader';
 import Result from '../result';
 import About from '../about';
+import Footer from '../footer';
 
 // import styles from './app.module.css';
 
@@ -18,6 +19,7 @@ function App() {
     <Preloader active={false} />
   <Result />
   <About />
+  <Footer />
     </main>
     </div>
   );
