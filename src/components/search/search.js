@@ -2,11 +2,10 @@
 import styles from './search.module.css';
 import Button from '../ui/button';
 import cn from 'classnames';
+import SearchForm from './search-form';
 
-function Search() {
+function Search({setSearchPhrase}) {
   return (
-
-
     <section className={styles['search']}>
     <div className={styles['search__container']}>
       <div className={styles['search__title-subtitle-cont']}>
@@ -19,21 +18,9 @@ function Search() {
           личном кабинете.
         </p>
       </div>
-      <form className={styles['search__form']} name="new">
-        <input
-          required
-          minLength="2"
-          type="text"
-          name="searchText"
-          className={styles['search__input']}
-          placeholder="Введите тему новости"
-          id="searchinput"
-        />
-        <Button classNameProp={'search__button'}>Искать</Button>
-        {/* <button type="submit" className={cn(styles['button'], styles['search__button'])}>
-          Искать
-        </button> */}
-      </form>
+
+      <SearchForm setSearchPhrase={setSearchPhrase}/>
+
     </div>
   </section>
 

@@ -3,10 +3,12 @@ import styles from './not-found.module.css';
 import { NavLink, Link } from "react-router-dom";
 import imageSrc from '../../images/not-found-icon.svg'
 import cn from 'classnames';
+import { useEffect } from 'react';
+// import sleepWrap from '../../hocs/sleep'
 
 function NotFound({active = false}) {
-  return ( 
-
+  // console.log(sleepWrap);
+  return (    
     <section className={cn(styles['not-found'], {[styles['not-found_enabled']]: active})}>
     <div className={styles['not-found__container']}>
       <img

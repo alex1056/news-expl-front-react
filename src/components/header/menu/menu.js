@@ -3,7 +3,7 @@ import styles from './menu.module.css';
 import { NavLink, Link } from "react-router-dom";
 import cn from 'classnames';
 
-function Menu() {
+function Menu( {setPopupActive}) {
   return ( 
             <ul className={styles['header__menu']}>
               <li className={styles['header__menu-item']}>
@@ -15,7 +15,7 @@ function Menu() {
                 <NavLink to="/articles" className={cn(styles.link, styles['header-link'])}  id="indexpagelink"
                   >Сохраненные статьи</NavLink>    
               </li>
-              <li 
+              <li onClick={()=> setPopupActive(true)}
               className={cn(styles['header__menu-item'], styles['auth-btn'], styles['header__auth-btn'])} >
                 <Link to="#" className={cn(styles.link, styles['header__link'])}>
                   <p className={styles['auth-btn__name-text']}> Авторизоваться</p>

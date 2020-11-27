@@ -6,11 +6,17 @@ import './css/card/card.css';
 import './css/content-subtitle/content-subtitle.css';
 import './css/text/text.css';
 import cn from 'classnames';
+import convertData from '../../utils/convert-data'
+import {dateParsToWords} from '../../redux/utils';
 
-function Article({_id='_id', link='link', keyword='keyword', image, date='date', title='title', text='text', source='source'}) {
-  return ( 
+function Article({...rest}) {
+const newObj = convertData(rest.data);
+const {_id, link, keyword, image, date, title, text, source} = newObj;
+  // console.log('rest=', rest);
+  // console.log('newObj=', newObj);
+return ( 
 <article id="articlecontainer" data-id={_id || 'no-id'}>
-      <a href="${data.link}" target="_blank" className="card card__link" >
+      <a href={link} target="_blank" className="card card__link" >
       <div className="card__tag">
         <p className="card__notification-text card__notification-text_tag">
         {keyword}
@@ -32,7 +38,7 @@ function Article({_id='_id', link='link', keyword='keyword', image, date='date',
       />
       </div>
       <div className="card__text-container">
-        <p className="card__date">{date}</p>
+        <p className="card__date">{dateParsToWords(date)}</p>
         <h3 className="content-subtitle card__content-subtitle">
         {title}
         </h3>

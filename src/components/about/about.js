@@ -33,7 +33,7 @@ function About({active = false}) {
         </picture>
       </div>
       <div className={styles['about__text-container']}>
-      {console.log('styles:',styles)}
+      {/* {console.log('styles:',styles)} */}
         {/* <h3 className={cn(styles['content-title'], styles['about__content-title'])}>Об авторе</h3> */}
         <h3 className={cn(styles['content-title'], styles['about__content-title'])}>Об авторе</h3>
         <p className={cn(styles['text'], styles['about__text'])}>
