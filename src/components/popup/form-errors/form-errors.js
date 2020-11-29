@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 // import sleepWrap from '../../hocs/sleep'
 
 function FormErrors({formErrors, fieldName, classNameForErrors}) {
-  // console.log(sleepWrap);
+  // console.log('formErrors=',formErrors);
+  // console.log('fieldName=',fieldName);
   return (     
-    <span className={classNameForErrors}>
+    <p className={classNameForErrors}>
       {formErrors[fieldName]}
-    </span>
+    </p>
   );
 }
 

@@ -6,23 +6,27 @@ import cn from 'classnames';
 // import { useEffect } from 'react';
 import InputButton from '../input-button';
 import FormErrors from '../form-errors';
-import MainApi from '../../../api/main-api';
-import { URL_MAIN_API } from '../../../config';
-import {setUserData, getUserData} from '../../../utils/local-storage-handler'
-import sleep from '../../../utils/sleep' 
+
+import { connect } from 'react-redux';
+import { loginAction } from '../../../redux/actions';
+import { loginLogoutSelector, 
+  loginLogoutLoadingSelector, 
+  loginLogoutLoadedSelector, 
+  loginLogoutErrorSelector } from '../../../redux/selectors'; 
+
+
 
 class LoginForm extends React.Component { 
   constructor(props) {
     super(props);
-    const {activeFormState, setActiveFormState, setPopupActiveState} = this.props;
-    // const {loginState, login, loading, loaded, error} = this.props;
-    // // console.log('login-form this.props=', this.props);
-    // this.login = login;
-    // this.error = error;
-    // this.login = this.login.bind(this);
+    const {activeFormState, setActiveFormState} = this.props;
+    const {loginState, login, loading, loaded, error} = this.props;
+    // console.log('login-form this.props=', this.props);
+    this.login = login;
+    this.error = error;
+    this.login = this.login.bind(this);
     this.activeFormState = activeFormState;
     this.setActiveFormState = setActiveFormState;
-    this.setPopupActiveState = setPopupActiveState;
     this.state = {
       email: '',
       password: '',
@@ -33,9 +37,6 @@ class LoginForm extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.mainApi = new MainApi(URL_MAIN_API);
-    
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
@@ -68,35 +69,8 @@ class LoginForm extends React.Component {
   }
 
   handleSubmit(event) {
-  event.preventDefault();
-   const credentials = {email: this.state.email, password: this.state.password};
-    this.mainApi.login(credentials)
-    .then((result) => {    
-      if (result === 200) {
-        this.mainApi.getUserData()
-          .then((data) => {
-            const { name } = data;
-            setUserData('userData', { isLoggedIn: true, userName: name });
-            sleep(1000)
-            .then(()=> 
-            this.setPopupActiveState(false))           
-//            console.log('name=', name);
-//            this._sessionHandler.setUserName(name);
-//            const props = { isLoggedIn: true, userName: name };
-//            this._header.render(props);
-// console.log('getUserData=', getUserData());
-          })
-          .catch((err) => {
-            this.setState({formErrors: {submit: err.message}});
-          });
-      }
-
-      return result;
-    })
-    .catch((err) => {
-      this.setState({formErrors: {submit: err.message}});
-    });
-    
+    event.preventDefault();
+    this.login({email: this.state.email, password: this.state.password});  
   }
 
   validateField(fieldName, value) {
@@ -180,21 +154,21 @@ class LoginForm extends React.Component {
 }
 
 
-// const mapStateToProps = (state, props) => {
-  
-// return {
-//   loginState: loginLogoutSelector(state),
-//   loading: loginLogoutLoadingSelector(state),
-//   loaded: loginLogoutLoadedSelector(state),
-//   error: loginLogoutErrorSelector(state),
-// }
-// };
+const mapStateToProps = (state, props) => {
+  // console.log('mapStateToProps=', props);
+  // console.log('loginErrorSelector(state)=', loginErrorSelector(state));
+return {
+  loginState: loginLogoutSelector(state),
+  loading: loginLogoutLoadingSelector(state),
+  loaded: loginLogoutLoadedSelector(state),
+  error: loginLogoutErrorSelector(state),
+}
+};
 
   
-//   const mapDispatchToProps = (dispatch, ownProps) => ({
-//     login: (credentials) => dispatch(loginAction(credentials)),
-//   });
+  const mapDispatchToProps = (dispatch, ownProps) => ({
+    login: (credentials) => dispatch(loginAction(credentials)),
+  });
 
 
-// export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
-export default LoginForm;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

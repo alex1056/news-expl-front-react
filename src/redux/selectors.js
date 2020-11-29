@@ -7,6 +7,11 @@ export const cardsFromApiLoadingSelector = (state) => state.cardsFromApi.loading
 export const cardsFromApiLoadedSelector = (state) => state.cardsFromApi.loaded;
 export const cardsFromApiErrorSelector = (state) => state.cardsFromApi.error;
 
+export const loginLogoutSelector = (state) => state.loginLogout.entities;
+export const loginLogoutLoadingSelector = (state) => state.loginLogout.loading;
+export const loginLogoutLoadedSelector = (state) => state.loginLogout.loaded;
+export const loginLogoutErrorSelector = (state) => state.loginLogout.error;
+
 
 /*
 const restaurantsSelector = (state) => state.restaurants.entities;

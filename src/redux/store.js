@@ -2,9 +2,8 @@ import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { routerMiddleware } from 'connected-react-router';
-// import logger from './middleware/logger';
-// import generateId from './middleware/generateId';
-import api from './middleware/api';
+import newsApi from './middleware/news-api';
+import mainApi from './middleware/main-api';
 
 import reducer from './reducer';
 // import history from '../history';
@@ -12,7 +11,8 @@ import reducer from './reducer';
 const enhancer = applyMiddleware(
   //thunk,
   // routerMiddleware(history),
-  api,
+  newsApi,
+  mainApi,
   // generateId,
   // logger
 );

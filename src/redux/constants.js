@@ -12,6 +12,8 @@ export const MAKE_ORDER = 'MAKE_ORDER';
 //////////
 
 export const LOAD_CARDS_FROM_API = 'LOAD_CARDS_FROM_API';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 
 
 //////////

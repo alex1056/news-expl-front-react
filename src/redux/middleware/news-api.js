@@ -15,21 +15,21 @@ const createGetParams = (data) => ({
 export default (store) => (next) => async (action) => {
   // console.log('api.js: 1) action=', action);
 
-  if (!action.CallAPI) 
+  if (!action.CallNewsAPI) 
   {
 
     // console.log('api.js: Сработало !action.CallAPI', action.CallAPI);
   return next(action);
 }
 
-  const { CallAPI, type, getData, ...rest } = action;
+  const { CallNewsAPI, type, getData, ...rest } = action;
   // console.log('api.js: 2) action=', CallAPI, type, getData);
   next({ ...rest, type: type + REQUEST });
 
   try {
     const params = getData ? createGetParams(getData) : {};
 
-    const response = await fetch(CallAPI, params).then(async (res) => {
+    const response = await fetch(CallNewsAPI, params).then(async (res) => {
       const data = await res.json();
       if (res.ok) return data;
       throw data;

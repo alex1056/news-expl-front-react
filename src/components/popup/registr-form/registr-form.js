@@ -9,6 +9,10 @@ import { useEffect } from 'react';
 import InputButton from '../input-button';
 import FormErrors from '../form-errors';
 
+import MainApi from '../../../api/main-api';
+import { URL_MAIN_API } from '../../../config';
+import sleep from '../../../utils/sleep'; 
+
 
 class RegistrForm extends React.Component {
   constructor(props) {
@@ -23,25 +27,43 @@ class RegistrForm extends React.Component {
       email: '',
       password: '',
       name: '',
-      formErrors: {email: '', password: '', name: ''},
+      formErrors: {email: '', password: '', name: '', submit: ''},
       emailValid: false,
       passwordValid: false,
       nameVilid: false,
       formValid: false
     }
+    this.mainApi = new MainApi(URL_MAIN_API);
   }
+
+  componentDidUpdate(prevProps) {
+    const {formErrors} = this.state;      
+     if (!prevProps.error && this.props.error ) {     
+         this.setState({formErrors: {email: formErrors.email, password: formErrors.password, submit: this.props.error.name}});
+         }
+   }
 
   handleChange(e) {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({[name]: value}, 
       () => { this.validateField(name, value) });
+    this.setState({formErrors: {submit: ''}});
   }
 
   handleSubmit(event) {
-    // alert('Отправленное имя: ' + this.state.value);
-    // this.setSearchPhrase(this.state.value);
     event.preventDefault();
+    const credentials = {email: this.state.email, password: this.state.password, name: this.state.name};
+    this.mainApi.signup(credentials)
+    .then((result) => {
+      sleep(1500)
+      .then(()=> 
+      this.setActiveFormState({...this.activeFormState, loginForm: false, registrForm: false, successForm: true}))
+      return result;
+    })
+    .catch((err) => {
+      this.setState({formErrors: {submit: err.message}});
+    });
     
   }
 
@@ -127,7 +149,7 @@ class RegistrForm extends React.Component {
         
         <FormErrors formErrors={this.state.formErrors} fieldName={'name'} classNameForErrors={styles['form__err-message']}/>
       </fieldset>
-      <p className={styles['form__err-message']} id="formerrmessage"></p>
+      <FormErrors formErrors={this.state.formErrors} fieldName={'submit'} classNameForErrors={styles['form__err-message']}/>
       <InputButton disabled={!this.state.formValid} onClickFunction={this.handleSubmit} classNameProp={'form__button'} btnText={'Зарегистрироваться'}/>
     </form>
     <div className={styles['popup__reg-enter']}>

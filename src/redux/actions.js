@@ -1,6 +1,6 @@
 import { replace, push } from 'connected-react-router';
 import {fromToDates} from './utils';
-import {URL_NEWS_API, LANGUAGE, API_KEY, PAGE_SIZE} from '../config';
+import {URL_NEWS_API, URL_MAIN_API, LANGUAGE, API_KEY, PAGE_SIZE} from '../config';
 import {
   INCREMENT,
   DECREMENT,
@@ -15,6 +15,8 @@ import {
   SUCCESS,
   FAILURE,
   LOAD_CARDS_FROM_API,
+  LOGIN,
+  LOGOUT
 } from './constants';
 // import {
 //   usersLoadingSelector,
@@ -30,9 +32,71 @@ export const loadCards = ({searchPhrase}) => {
 return {
   type: LOAD_CARDS_FROM_API,
   payload: { searchPhrase },
-  CallAPI: `${URL_NEWS_API}?q=${searchPhrase}&from=${dates.from}&to=${dates.to}&language=${LANGUAGE}&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+  CallNewsAPI: `${URL_NEWS_API}?q=${searchPhrase}&from=${dates.from}&to=${dates.to}&language=${LANGUAGE}&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
 }
 };
+
+export const loginAction = (data = { email: 'dlsk@dskf10.yu', password: '123' }) => {
+ return {
+  type: LOGIN,
+  payload: { data },
+  CallMainAPI: `${URL_MAIN_API}/signin`
+}
+};
+
+export const logoutAction = () => {
+  return {
+   type: LOGOUT,
+   payload: {},
+   CallMainAPI: `${URL_MAIN_API}/signout`
+ }
+ };
+ 
+
+
+/*
+logout() {
+    return fetch(`${this._urlMainApi}/logout`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return Promise.resolve(res.status);
+        }
+        return Promise.reject(Error('Произошла ошибка'));
+      })
+      .catch((err) => Promise.reject(Error(err.message)));
+  }
+*/
+
+
+/*
+login(credentials = { email: 'dlsk@dskf10.yu', password: '123' }) {
+    return fetch(`${this._urlMainApi}/signin`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return Promise.resolve(res.status);
+        }
+        return Promise.reject(Error('Неправильные логин или пароль'));
+      })
+      .catch((err) => Promise.reject(Error(err.message)));
+  }
+*/
+
 
 /*
 

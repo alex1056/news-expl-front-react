@@ -13,15 +13,15 @@ import {useState} from 'react';
 // import styles from './app.module.css';
 
 function App() {
-  const [popupActive, setPopupActive] = useState(false);
+  const [popupActive, setPopupActiveState] = useState(false);
   return (
     <div>
-    <Header setPopupActive={setPopupActive} />
+    <Header setPopupActiveState={setPopupActiveState} />
     <main className='main'>
     <SearchWrapper />
     <About />
     <Footer />
-    <Popup active={popupActive} setPopupActive={setPopupActive} />
+    <Popup active={popupActive} setPopupActiveState={setPopupActiveState} />
     </main>
     </div>
   );

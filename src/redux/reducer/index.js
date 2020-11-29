@@ -8,10 +8,12 @@ import { connectRouter } from 'connected-react-router';
 // import users from './users';
 // import history from '../../history';
 import cardsFromApi from './cards-from-api';
+import loginLogout from './login-logout';
 
 const reducer = combineReducers({
   // router: connectRouter(history),
   cardsFromApi,
+  loginLogout,
   // order,
   // restaurants,
   // products,

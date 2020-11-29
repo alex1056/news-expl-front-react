@@ -6,14 +6,14 @@ import Menu from './menu';
 import cn from 'classnames';
 
 
-function Header({setPopupActive}) {
+function Header({setPopupActiveState}) {
   return (
     <div className={styles.header}>
       <div className={styles.header__container}>      
           <HeaderLogo content={'NewsExplorer'} />    
           <HeaderMobileIcon type={'sandwich'}/>
           <div className={styles['header__menu-nav']}>
-          <Menu setPopupActive={setPopupActive} />
+          <Menu setPopupActiveState={setPopupActiveState} />
           </div>
       </div>
 
@@ -31,14 +31,10 @@ function Header({setPopupActive}) {
                <HeaderMobileIcon type={'cross'} />
             </div>
 
-            <Menu setPopupActive={setPopupActive}/>
+            <Menu setPopupActiveState={setPopupActiveState}/>
 
           </nav>
         </div>
-
-
-
-
 
       </div>
   );

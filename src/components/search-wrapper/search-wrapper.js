@@ -14,7 +14,7 @@ import Search from '../search';
 import NotFound from '../not-found';
 import Preloader from '../preloader';
 import Result from '../result';
-import SleepWrapper from '../sleep-wrapper';
+// import SleepWrapper from '../sleep-wrapper';
 
 
 function SearchWrapper(props) {
@@ -23,7 +23,7 @@ function SearchWrapper(props) {
   const [searchPhrase, setSearchPhrase] = useState(null);
   const [showPreloader, setShowPreloader] = useState((loading || !loaded) && !!searchPhrase && !error);
   const [articlesNumber, setArticlesNumber] = useState(3);
-
+//  console.log('SearchWrapper.js, props=', props);
 
   useEffect(() => {
     setTimeout(() => {      
