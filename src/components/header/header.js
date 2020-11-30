@@ -4,6 +4,7 @@ import HeaderLogo from '../ui/header-logo';
 import HeaderMobileIcon from '../ui/header-mobile-icon';
 import Menu from './menu';
 import cn from 'classnames';
+import {UserContext} from '../../user-context/user-context';
 
 
 function Header({setPopupActiveState}) {
@@ -13,7 +14,9 @@ function Header({setPopupActiveState}) {
           <HeaderLogo content={'NewsExplorer'} />    
           <HeaderMobileIcon type={'sandwich'}/>
           <div className={styles['header__menu-nav']}>
-          <Menu setPopupActiveState={setPopupActiveState} />
+          <UserContext.Consumer>
+            {({userContextState}) => <Menu setPopupActiveState={setPopupActiveState} userData={`${userContextState.userName ? userContextState.userName : 'Авторизоваться'}`}/>}    
+          </UserContext.Consumer>
           </div>
       </div>
 
@@ -30,9 +33,9 @@ function Header({setPopupActiveState}) {
               </div> */}
                <HeaderMobileIcon type={'cross'} />
             </div>
-
-            <Menu setPopupActiveState={setPopupActiveState}/>
-
+             <UserContext.Consumer> 
+            {({userContextState}) => <Menu setPopupActiveState={setPopupActiveState} userData={`${userContextState.userName ? userContextState.userName : 'Авторизоваться'}`}/>}
+          </UserContext.Consumer> 
           </nav>
         </div>
 

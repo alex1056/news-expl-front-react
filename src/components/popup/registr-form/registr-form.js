@@ -11,12 +11,13 @@ import FormErrors from '../form-errors';
 
 import MainApi from '../../../api/main-api';
 import { URL_MAIN_API } from '../../../config';
-import sleep from '../../../utils/sleep'; 
+import sleep from '../../../utils/sleep';
 
 
 class RegistrForm extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {value: ''};
     const {activeFormState, setActiveFormState} = this.props;
     this.activeFormState = activeFormState;

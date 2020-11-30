@@ -9,12 +9,19 @@ import FormErrors from '../form-errors';
 import MainApi from '../../../api/main-api';
 import { URL_MAIN_API } from '../../../config';
 import {setUserData, getUserData} from '../../../utils/local-storage-handler'
-import sleep from '../../../utils/sleep' 
+import sleep from '../../../utils/sleep';
+import {UserContext} from '../../../user-context/user-context';
+// import {changeUserContext} from '../../../user-context/change-user-context';
+
 
 class LoginForm extends React.Component { 
   constructor(props) {
     super(props);
     const {activeFormState, setActiveFormState, setPopupActiveState} = this.props;
+    // const { userContextState, userContextSetState } = useContext(UserContext);
+
+    // console.log('login-form.js, props=', props);
+    // console.log('login-form.js, UserContext=', UserContext);
     // const {loginState, login, loading, loaded, error} = this.props;
     // // console.log('login-form this.props=', this.props);
     // this.login = login;
@@ -35,8 +42,11 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.mainApi = new MainApi(URL_MAIN_API);
-    
+    // this.changeUserContext = changeUserContext;
+    // this.context = UserContext;
   }
+  static contextType = UserContext;
+
 
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log('this.Props=', this.props);
@@ -76,15 +86,15 @@ class LoginForm extends React.Component {
         this.mainApi.getUserData()
           .then((data) => {
             const { name } = data;
-            setUserData('userData', { isLoggedIn: true, userName: name });
+            const {userContextSetState} = this.context;
+            
+            
+            // console.log('login-form.js, this.context=', this.context);
             sleep(1000)
-            .then(()=> 
-            this.setPopupActiveState(false))           
-//            console.log('name=', name);
-//            this._sessionHandler.setUserName(name);
-//            const props = { isLoggedIn: true, userName: name };
-//            this._header.render(props);
-// console.log('getUserData=', getUserData());
+            .then(()=> {
+              userContextSetState({ isLoggedIn: true, userName: name });
+              this.setPopupActiveState(false);           
+            })
           })
           .catch((err) => {
             this.setState({formErrors: {submit: err.message}});

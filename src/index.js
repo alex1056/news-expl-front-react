@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import store from './redux/store';
 
 // DEV ONLY!!!
-window.store = store;
+// window.store = store;
 
 ReactDOM.render(
   <Provider store={store}>
