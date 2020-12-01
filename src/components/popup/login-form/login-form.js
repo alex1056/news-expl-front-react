@@ -13,7 +13,6 @@ import sleep from '../../../utils/sleep';
 import {UserContext} from '../../../user-context/user-context';
 // import {changeUserContext} from '../../../user-context/change-user-context';
 
-
 class LoginForm extends React.Component { 
   constructor(props) {
     super(props);
@@ -86,12 +85,11 @@ class LoginForm extends React.Component {
         this.mainApi.getUserData()
           .then((data) => {
             const { name } = data;
-            const {userContextSetState} = this.context;
-            
-            
+            const {userContextSetState} = this.context;           
             // console.log('login-form.js, this.context=', this.context);
-            sleep(1000)
+            sleep(500)
             .then(()=> {
+              setUserData('userData',{ isLoggedIn: true, userName: name });
               userContextSetState({ isLoggedIn: true, userName: name });
               this.setPopupActiveState(false);           
             })

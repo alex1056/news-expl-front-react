@@ -7,10 +7,10 @@ import cn from 'classnames';
 // import { useEffect } from 'react';
 // import sleepWrap from '../../hocs/sleep'
 
-function PopupBack({active = false, setPopupActive}) {
+function PopupBack({active = false, setPopupActiveState}) {
   // console.log(rest);
   return (    
-   <div onClick={()=> setPopupActive(false)} className={cn(styles['popup-back'], {[styles['popup-back_is-opened']]:active})}>
+   <div onClick={()=> setPopupActiveState(false)} className={cn(styles['popup-back'], {[styles['popup-back_is-opened']]:active})}>
      
     </div>
   //   <section className={cn(styles['not-found'], {[styles['not-found_enabled']]: active})}>

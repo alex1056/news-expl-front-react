@@ -15,7 +15,7 @@ function Header({setPopupActiveState}) {
           <HeaderMobileIcon type={'sandwich'}/>
           <div className={styles['header__menu-nav']}>
           <UserContext.Consumer>
-            {({userContextState}) => <Menu setPopupActiveState={setPopupActiveState} userData={`${userContextState.userName ? userContextState.userName : 'Авторизоваться'}`}/>}    
+            {({userContextState}) => <Menu setPopupActiveState={setPopupActiveState} userData={userContextState}/>}    
           </UserContext.Consumer>
           </div>
       </div>
@@ -34,7 +34,7 @@ function Header({setPopupActiveState}) {
                <HeaderMobileIcon type={'cross'} />
             </div>
              <UserContext.Consumer> 
-            {({userContextState}) => <Menu setPopupActiveState={setPopupActiveState} userData={`${userContextState.userName ? userContextState.userName : 'Авторизоваться'}`}/>}
+            {({userContextState}) => <Menu setPopupActiveState={setPopupActiveState} userData={userContextState}/>}
           </UserContext.Consumer> 
           </nav>
         </div>

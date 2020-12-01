@@ -1,22 +1,22 @@
-function setArrLocalStorage(itemName = 'newsData', arrJSON) {
+function setArrsessionStorage(itemName = 'newsData', arrJSON) {
   const arr = JSON.stringify(arrJSON);
-  localStorage.setItem(itemName, arr);
+  sessionStorage.setItem(itemName, arr);
 }
 
-function getArrLocalStorage(itemName = 'newsData') {
-  const newsData = JSON.parse(localStorage.getItem(itemName));
+function getArrsessionStorage(itemName = 'newsData') {
+  const newsData = JSON.parse(sessionStorage.getItem(itemName));
   // console.log(newsData);
   return newsData;
 }
 
 function setUserData (itemName = 'userData', userData) {
   const userDataStr = JSON.stringify(userData);
-  localStorage.setItem(itemName, userDataStr);
+  sessionStorage.setItem(itemName, userDataStr);
 }
 
 function getUserData (itemName = 'userData') {
-  const userDataJSON = JSON.parse(localStorage.getItem(itemName));
+  const userDataJSON = JSON.parse(sessionStorage.getItem(itemName));
   return userDataJSON;
 }
 
-module.exports = {setUserData, getUserData, setArrLocalStorage, getArrLocalStorage };
+module.exports = {setUserData, getUserData, setArrsessionStorage, getArrsessionStorage };
