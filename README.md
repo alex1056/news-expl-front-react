@@ -18,7 +18,7 @@
 - CSS,
 - Node.js
 
-Ссылка на сервер [http://news-explore.ru/](https://news-explore.ru/)
+Ссылка на сервер [http://news-explore.ru/](http://news-explore.ru/)
 
 ## Available Scripts
 
