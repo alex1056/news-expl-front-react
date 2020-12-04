@@ -1,9 +1,9 @@
 import styles from './search-wrapper.module.css';
-import { NavLink, Link } from "react-router-dom";
-import cn from 'classnames';
+// import { NavLink, Link } from "react-router-dom";
+// import cn from 'classnames';
 import { connect } from 'react-redux';
 import { loadCards, loadUserCards } from '../../redux/actions';
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { cardsFromApiSelector, 
   cardsFromApiLoadingSelector, 
   cardsFromApiLoadedSelector, 
@@ -13,22 +13,19 @@ import Search from '../search';
 import NotFound from '../not-found';
 import Preloader from '../preloader';
 import Result from '../result';
-import {UserContext} from '../../user-context/user-context';
+// import {UserContext} from '../../user-context/user-context';
 import {setUserData, getUserData } from '../../utils/local-storage-handler';
 
 function SearchWrapper(props) {
 //  console.log('SearchWrapper, props=', props);
-
   const { cardsNewsApi, loading, loaded, error, loadUserCards, loadCards, activePageState, setActivePageState } = props;
   const cardsNewsApiLength = Object.keys(cardsNewsApi).length;
   const searchPhraseSaved = cardsNewsApiLength > 0 ? getUserData('searchPhrase') : {searchPhrase: ''};
-  // const [searchPhrase, setSearchPhrase] = useState(searchPhraseSaved ? searchPhraseSaved.searchPhrase : null);
   const [searchPhrase, setSearchPhrase] = useState(searchPhraseSaved);
-  // const [showPreloader, setShowPreloader] = useState((loading || !loaded) && !!searchPhrase && !error);
   const [showPreloader, setShowPreloader] = useState((loading && !loaded) && !error);
   const [articlesNumber, setArticlesNumber] = useState(3);
   // const { userContextState } = useContext(UserContext);
-  console.log('SearchWrapper, cardsNewsApi=', Object.keys(cardsNewsApi).length);
+  // console.log('SearchWrapper, cardsNewsApi=', Object.keys(cardsNewsApi).length);
 
 useEffect(() => { 
   // if(activePageState !== 'indexPage') {

@@ -39,7 +39,6 @@ export default (store) => (next) => async (action) => {
 
   if (!action.CallMainAPI) 
   {
-
     // console.log('api.js: Сработало !action.CallMainAPI', action.CallMainAPI);
   return next(action);
 }
@@ -56,26 +55,18 @@ export default (store) => (next) => async (action) => {
   next({ ...rest, type: type + REQUEST });
 
   try {
-    // const params = data ? createGetParams(data) : {};
-    // const params = data ? createGetParams(data) : {};
+    
     const params = createGetParams(data);
-    // console.log('main-api.js, params=', params);
     const response = await fetch(CallMainAPI, params).then(async (res) => {
-      // console.log('api.js: 3) res=', res);
       const data = await res.json();
       if (res.ok) 
       { 
-        // console.log('api.js: 4) data=', data);
         return  data; 
-        // return { status: res.status };
       }
-      // else throw({name: 'Неправильные логин или пароль', status: res.status});
-      // console.log('api.js: 5) data=', data);
       throw data;
     });
     return next({ ...rest, type: type + SUCCESS, response });
   } catch (error) {
-    // console.log('api.js: 6) error=', error);
     throw next({ ...rest, type: type + FAILURE, error });
   }
 };

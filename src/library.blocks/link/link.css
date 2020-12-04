@@ -1,8 +1,0 @@
-@import url('./_selected/link_selected.css');
-.link {
-    text-decoration: none;
-}
-
-.link:hover {
-    cursor: pointer;
-}
