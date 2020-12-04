@@ -18,10 +18,10 @@ function Footer({active = false}) {
         </li>
         <li className={cn(styles['nav__item'], styles['footer__nav-item'])}>
           <a
-            href="https://praktikum.yandex.ru/"
+            href="https://diploma-2020.ru/"
             target="_blank"
             className={cn(styles['link'], styles['nav__link'], styles['footer__link'])}
-            >Яндекс.Практикум</a
+            >Проект на нативном Js</a
           >
         </li>
         <li className={cn(styles['nav__item'], styles['footer__nav-item'])}>
