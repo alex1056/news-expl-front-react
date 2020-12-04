@@ -1,0 +1,133 @@
+.articles-summary {
+  width: 100%;
+  display: block;
+  padding-top: 40px;
+  padding-bottom: 56px;
+  background: #fff;
+}
+
+@media screen and (max-width: 1439px) {
+  .articles-summary {
+    padding-top: 24px;
+    padding-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .articles-summary {
+    padding-top: 8px;
+  }
+}
+
+.articles-summary__title {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', Verdana, 'Geneva CY', 'San-serif';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 27, 34, 0.5);
+  padding-bottom: 28px;
+}
+
+@media screen and (max-width: 1439px) {
+  .articles-summary__title {
+    padding-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .articles-summary__title {
+    font-size: 12px;
+    line-height: 24px;
+  }
+}
+
+.articles-summary__text {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 1439px) {
+  .articles-summary__text {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .articles-summary__text {
+    display: inline-block;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.articles-summary__tags {
+  color: #1a1b22;
+  display: flex;
+}
+
+@media screen and (max-width: 767px) {
+  .articles-summary__tags {
+    display: block;
+  }
+}
+
+.content-title.articles-summary__subtitle {
+  font-size: 40px;
+  line-height: 46px;
+  color: #1a1b22;
+  width: 530px;
+  padding-bottom: 30px;
+}
+
+@media screen and (max-width: 1439px) {
+  .articles-summary__subtitle {
+    font-size: 30px;
+    line-height: 34px;
+    width: 336px;
+    padding-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .articles-summary__subtitle {
+    width: 100%;
+  }
+}
+
+.articles-summary__container {
+  max-width: 1232px;
+  width: 100%;
+  /* background-color: aqua; */
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1439px) {
+  .articles-summary__container {
+    width: calc(100% - 80px);
+    max-width: 1232px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .articles-summary__container {
+    width: calc(100% - 32px);
+  }
+}
+
+.content-title {
+  font-family: 'Roboto Slab', Georgia, Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 64px;
+  text-align: left;
+  color: #ffffff;
+  padding: 0;
+  margin: 0;
+}

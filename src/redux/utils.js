@@ -7,6 +7,22 @@ export const arrToMap = (arr, searchPhrase) =>
   }, 
     {});
 
+export const arrToMapUserCards = (arr) =>
+  arr.reduce((acc, item) => {
+    // item['searchPhrase'] = searchPhrase;
+    return { ...acc, [item.link]: item }
+   }, 
+    {});
+
+export const deleteCard = (entities, article) => 
+ {
+  // console.log('1) cards-from-api.js: delete card state=', entities, article);
+  delete entities[article.link];
+  // console.log('2) cards-from-api.js: delete card state=', entities, article);
+  return entities;
+ }
+   
+
 export const getById = (selector, defaultValue) =>
   createSelector(
     selector,

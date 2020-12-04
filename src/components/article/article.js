@@ -1,115 +1,112 @@
-// import './header.css';
+import {NEWS_API} from '../../constants';
+import {useState, useEffect} from 'react';
+import { connect } from 'react-redux';
+import { loadCards, loadUserCards, deleteCardFromSource } from '../../redux/actions';
+import { cardsFromApiUserCardsSelector, userCardsSelector, userCardsLoadingSelector, userCardsLoadedSelector } from '../../redux/selectors'; 
 import styles from './article.module.css';
 import { NavLink, Link } from "react-router-dom";
 import imageSrc from '../../images/img4.png'
-import './css/card/card.css';
-import './css/content-subtitle/content-subtitle.css';
-import './css/text/text.css';
+// import './css/card/card.css';
+// import './css/content-subtitle/content-subtitle.css';
+// import './css/text/text.css';
 import cn from 'classnames';
+import {URL_MAIN_API} from '../../config';
 import convertData from '../../utils/convert-data'
 import {dateParsToWords} from '../../redux/utils';
+import MainApi from '../../api/main-api';
+const mainApi = new MainApi(URL_MAIN_API);
+
+
 
 function Article({...rest}) {
-const newObj = convertData(rest.data);
-const {_id, link, keyword, image, date, title, text, source} = newObj;
-  // console.log('rest=', rest);
-  // console.log('newObj=', newObj);
-return ( 
-<article id="articlecontainer" data-id={_id || 'no-id'}>
-      <a href={link} target="_blank" className="card card__link" >
-      <div className="card__tag">
-        <p className="card__notification-text card__notification-text_tag">
-        {keyword}
-        </p>
-      </div>
-      <div className="card__save-article-container">
-      <div className="card__notification">
-          <p className="card__notification-text">
-            Войдите, чтобы сохранять статьи
-          </p>
-        </div>
-        <div className="card__article-btn"></div>
-      </div>
-      <div className="card__img-container">
-      <img
-        src={image || imageSrc}
-        alt="Природа 1"
-        className="card__img"
-      />
-      </div>
-      <div className="card__text-container">
-        <p className="card__date">{dateParsToWords(date)}</p>
-        <h3 className="content-subtitle card__content-subtitle">
-        {title}
-        </h3>
-        <p className="text card__text">
-        {text}
-        </p>
-        <p className="card__source">{source}</p>
-      </div>
-      </a>
-    </article>
+  const {loadUserCards, sourceData, loading, deleteCardFromSource } = rest;
+  const articleObj = sourceData === NEWS_API ? convertData(rest.data) : rest.data;
+  const {_id, link, keyword, image, date, title, text, source, userSaved} = articleObj;
+
+  // console.log('article.js, articleObj=', articleObj);
+  // console.log('article.js, rest=', rest);
 
 
+    return ( 
+    <article data-id={_id || 'no-id'} className={styles['card-wrapper']}>
+          <a href={link} target="_blank" className={cn(styles['card'], styles['card__link'])} >
+          <div className={styles['card__tag']}>
+            <p className={cn(styles['card__notification-text'], styles['card__notification-text_tag'])}>
+            {keyword}
+            </p>
+          </div>
+          <div className={styles['card__save-article-container']}>
+          <div className={styles['card__notification']}>
+              <p className={styles['card__notification-text']}>
+                Войдите, чтобы сохранять статьи
+              </p>
+            </div>
+            <div onClick={(e)=>handleClick({e, articleObj, loadUserCards, userSaved, loading, sourceData, deleteCardFromSource})} 
+            className={cn({[styles['card__remove-article-btn']]: sourceData !== NEWS_API}, {[styles['card__article-btn']]: sourceData === NEWS_API}, {[styles['card__save-article-btn_saved']]: userSaved && sourceData === NEWS_API})}>
+            </div>
+          </div>
+          <div className={styles['card__img-container']}>
+          <img
+            src={image || imageSrc}
+            alt="Природа 1"
+            className={styles['card__img']}
+          />
+          </div>
+          <div className={styles['card__text-container']}>
+            <p className={styles['card__date']}>{dateParsToWords(date)}</p>
+            <h3 className={cn(styles['content-subtitle'], styles['card__content-subtitle'])}>
+            {title}
+            </h3>
+            <p className={cn(styles['text'], styles['card__text'])}>
+            {text}
+            </p>
+            <p className={styles['card__source']}>{source}</p>
+          </div>
+          </a>
+        </article>
+      );
+    }
 
+    const handleClick = ({e, articleObj, loadUserCards, userSaved, loading, sourceData, deleteCardFromSource}) => {
+      e.preventDefault();
+      
+      if (sourceData !== NEWS_API) {
+        const { _id } = articleObj;
+        mainApi.deleteArticle(_id)
+        .then((data) => {
+          loadUserCards();
+          deleteCardFromSource({article: articleObj});
+          // console.log('Удалили объект=', data);
+        } )
+        .catch((error) => 
+          console.log('article.js, handleClick=>error=', error.message)
+      )
+      return;
+      }
 
-    // <article id="articlecontainer" data-id={_id || 'no-id'}>
+      if (!userSaved && !loading) {
+        mainApi.createArticle(articleObj)
+          .then(()=> {
+            loadUserCards();
+        })
+          .catch((error) => {
+            console.log('article.js, handleClick=>error=', error.message);
+        })
+      }
+    }
+
+    const mapStateToProps = (state, props) => ({
+      // userCards: cardsFromApiUserCardsSelector(state), 
+      userCards: userCardsSelector(state), 
+      loading: userCardsLoadingSelector(state),
+      loaded: userCardsLoadedSelector(state),
      
-    //   {console.log({styles})}
-    //   <a href={link} target="_blank" className={cn(styles['card'], ['card__link'])} >
-    //   <div className={styles['card__tag']}>
-    //     <p className={cn(styles['card__notification-text'], ['card__notification-text_tag'])}>
-    //     {keyword}
-    //     </p>
-    //   </div>
-    //   <div className={styles['card__save-article-container']}>
-    //   <div className={styles['card__notification']}>
-    //       <p className={styles['card__notification-text']}>
-    //         Войдите, чтобы сохранять статьи
-    //       </p>
-    //     </div>
-    //     <div className={styles['card__article-btn']}></div>
-    //   </div>
-    //   <div className={styles['card__img-container']}>
-    //   <img
-    //     src={image}
-    //     alt="Природа 1"
-    //     className={styles['card__img']}
-    //   />
-    //   </div>
-    //   <div className={styles['card__text-container']}>
-    //     {/* <p class="card__date">${this.dateParsToWords(data.date)}</p> */}
-    //     <p className={styles['card__date']}>{date}</p>
-    //     <h3 className={cn(styles['content-subtitle'], ['card__content-subtitle'])}>
-    //     {title}
-    //     </h3>
-    //     {/* <h3 class="content-subtitle card__content-subtitle">
-    //     ${this.removeTags(data.title)}
-    //     </h3> */}
-    //     {/* <p class="text card__text">
-    //     ${this.removeTags(data.text)}
-    //     </p> */}
-    //     <p className={cn(styles['text'], ['card__text'])}>
-    //     {text}
-    //     </p>
-    //     <p className={styles['card__source']}>{source}</p>
-    //   </div>
-    //   </a>
-    // </article>
-  //   <section className={cn(styles['not-found'], {[styles['not-found_enabled']]: active})}>
-  //   <div className={styles['not-found__container']}>
-  //     <img
-  //       src={imageSrc}
-  //       alt="Изображение: Ничего не найдено"
-  //       className={styles['not-found__icon']}
-  //     />
-  //     <h2 className={cn(styles['content-title'], styles['not-found__title'])}>Ничего не найдено</h2>
-  //     <p className={cn(styles['text'], styles['not-found__text'])}>
-  //       К сожалению по вашему запросу ничего не найдено.
-  //     </p>
-  //   </div>
-  // </section>
-  );
-}
+    });
 
-export default Article;
+    const mapDispatchToProps = (dispatch, ownProps) => ({
+      loadCards: (searchPhrase) => dispatch(loadCards(searchPhrase)),
+      loadUserCards: () => dispatch(loadUserCards()),
+      deleteCardFromSource: (article) => dispatch(deleteCardFromSource(article)),
+    });
+
+    export default connect(mapStateToProps, mapDispatchToProps)(Article);

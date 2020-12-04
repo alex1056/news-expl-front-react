@@ -1,5 +1,6 @@
 export default function convertData(dataObjFromNewsApi) {
-    try {
+  // console.log(dataObjFromNewsApi);  
+  try {
       const {
         description,
         publishedAt,
@@ -8,6 +9,7 @@ export default function convertData(dataObjFromNewsApi) {
         url,
         urlToImage,
         searchPhrase,
+        userSaved,
       } = dataObjFromNewsApi;
 
       const dataObj = {
@@ -19,6 +21,7 @@ export default function convertData(dataObjFromNewsApi) {
         image: urlToImage,
         date: publishedAt,
         source: source.name,
+        userSaved,
       };
       return dataObj;
     } catch (error) {

@@ -15,8 +15,10 @@ import {
   SUCCESS,
   FAILURE,
   LOAD_CARDS_FROM_API,
+  LOAD_USER_CARDS,
   LOGIN,
-  LOGOUT
+  LOGOUT,
+  DELETE_CARD_FROM_SOURCE
 } from './constants';
 // import {
 //   usersLoadingSelector,
@@ -29,12 +31,30 @@ import {
 export const loadCards = ({searchPhrase}) => {
   // console.log('actions.js: action-loadCards-searchPhrase=',searchPhrase);
   const dates = fromToDates();
+  return {
+    type: LOAD_CARDS_FROM_API,
+    payload: { searchPhrase },
+    CallNewsAPI: `${URL_NEWS_API}?q=${searchPhrase}&from=${dates.from}&to=${dates.to}&language=${LANGUAGE}&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+  }
+};
+
+export const deleteCardFromSource = (article) => {
+  return {
+    type: DELETE_CARD_FROM_SOURCE,
+    payload: article,  
+  }
+};
+
+export const loadUserCards = () => {
+  // console.log('actions.js: Вызвали loadUserCards=');
+  // const dates = fromToDates();
 return {
-  type: LOAD_CARDS_FROM_API,
-  payload: { searchPhrase },
-  CallNewsAPI: `${URL_NEWS_API}?q=${searchPhrase}&from=${dates.from}&to=${dates.to}&language=${LANGUAGE}&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+  type: LOAD_USER_CARDS,
+  // payload: { data: 'from action loadUserCards' },
+  CallMainAPI: `${URL_MAIN_API}/articles`
 }
 };
+
 
 export const loginAction = (data = { email: 'dlsk@dskf10.yu', password: '123' }) => {
  return {

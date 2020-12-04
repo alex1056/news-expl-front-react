@@ -12,6 +12,35 @@ export const loginLogoutLoadingSelector = (state) => state.loginLogout.loading;
 export const loginLogoutLoadedSelector = (state) => state.loginLogout.loaded;
 export const loginLogoutErrorSelector = (state) => state.loginLogout.error;
 
+export const userCardsSelector = (state) => state.userCards.entities;
+export const userCardsLoadingSelector = (state) => state.userCards.loading;
+export const userCardsLoadedSelector = (state) => state.userCards.loaded;
+export const userCardsErrorSelector = (state) => state.userCards.error;
+
+export const cardsFromApiUserCardsSelector = createSelector(
+  cardsFromApiSelector,
+  userCardsSelector,
+  (cardsFromApi, userCards) => {
+    // Object.entries(order).map(([id, amount]) => ({ id, amount }))
+    // console.log('selectros.js, Object.keys(cardsFromApiSelector)=', Object.keys(cardsFromApi));
+    Object.keys(userCards)
+    .forEach((item) => { 
+      if(cardsFromApi[item]) {
+        // const newCard = {...cardsFromApi[item], userSaved: true};
+        // return { ...cardsFromApi,  newCard }
+        return cardsFromApi[item] = {...cardsFromApi[item], userSaved: true};
+      }
+    } 
+    )
+    // console.log('selectros.js, cardsFromApi=', cardsFromApi);
+    // console.log('selectros.js, userCards=', userCards);
+    return cardsFromApi;
+  /*  {
+    ...review,
+    user: users[review.userId] ?.name,
+  } */
+}
+);
 
 /*
 const restaurantsSelector = (state) => state.restaurants.entities;

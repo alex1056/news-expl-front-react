@@ -7,15 +7,16 @@ import cn from 'classnames';
 import {UserContext} from '../../user-context/user-context';
 
 
-function Header({setPopupActiveState}) {
+function Header({setPopupActiveState, colorProp}) {
+  // console.log('colorProp=', colorProp);
   return (
-    <div className={styles.header}>
-      <div className={styles.header__container}>      
+    <div className={cn(styles['header'], {[styles['header_dark']]: colorProp === 'dark'}, {[styles['header_dark-bottom']]: colorProp === 'dark'})}>
+      <div className={cn(styles['header__container'])}>      
           <HeaderLogo content={'NewsExplorer'} />    
           <HeaderMobileIcon type={'sandwich'}/>
           <div className={styles['header__menu-nav']}>
           <UserContext.Consumer>
-            {({userContextState}) => <Menu setPopupActiveState={setPopupActiveState} userData={userContextState}/>}    
+            {({userContextState}) => <Menu colorProp={colorProp} setPopupActiveState={setPopupActiveState} userData={userContextState}/>}    
           </UserContext.Consumer>
           </div>
       </div>
@@ -34,7 +35,7 @@ function Header({setPopupActiveState}) {
                <HeaderMobileIcon type={'cross'} />
             </div>
              <UserContext.Consumer> 
-            {({userContextState}) => <Menu setPopupActiveState={setPopupActiveState} userData={userContextState}/>}
+            {({userContextState}) => <Menu colorProp={colorProp} setPopupActiveState={setPopupActiveState} userData={userContextState}/>}
           </UserContext.Consumer> 
           </nav>
         </div>

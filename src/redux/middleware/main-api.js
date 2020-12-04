@@ -13,6 +13,7 @@ import { FAILURE, REQUEST, SUCCESS } from '../constants';
 // });
 
 const createGetParams = (data) => {
+  // console.log('main-api.js, data=', data);
   if (data) {
  return {
   method: 'POST',
@@ -44,26 +45,33 @@ export default (store) => (next) => async (action) => {
 }
 
   const { CallMainAPI, type, payload, ...rest } = action;
-  const { data } = payload;
+  let data;
+  try {
+    data = payload.payload;
+  } catch (error) {
+    data = null;
+  }
+  
   // console.log('main-api.js: 2) action=', action);
   next({ ...rest, type: type + REQUEST });
 
   try {
     // const params = data ? createGetParams(data) : {};
+    // const params = data ? createGetParams(data) : {};
     const params = createGetParams(data);
     // console.log('main-api.js, params=', params);
     const response = await fetch(CallMainAPI, params).then(async (res) => {
       // console.log('api.js: 3) res=', res);
-      // const data = await res.json();
+      const data = await res.json();
       if (res.ok) 
       { 
         // console.log('api.js: 4) data=', data);
-        // return  data; 
-        return { status: res.status };
+        return  data; 
+        // return { status: res.status };
       }
-      else throw({name: 'Неправильные логин или пароль', status: res.status});
+      // else throw({name: 'Неправильные логин или пароль', status: res.status});
       // console.log('api.js: 5) data=', data);
-      // throw data;
+      throw data;
     });
     return next({ ...rest, type: type + SUCCESS, response });
   } catch (error) {

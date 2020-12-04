@@ -1,13 +1,12 @@
 // import produce from 'immer';
 import {
-  LOAD_CARDS_FROM_API,
-  DELETE_CARD_FROM_SOURCE,
+  LOAD_USER_CARDS,
   FAILURE,
   REQUEST,
   SUCCESS,
 } from '../constants';
 // import api from '../middleware/api';
-import { arrToMap, deleteCard } from '../utils';
+import { arrToMapUserCards } from '../utils';
 
 const initialState = {
   entities: {},
@@ -19,42 +18,30 @@ const initialState = {
 export default (state = initialState, action) => {
   const { type, payload, response, error } = action;
   // console.log('cards-from-api.js: action=', action);
-  // console.log('cards-from-api.js: payload=', payload);
+  // console.log('user-cards.js: response=', response);
 
   switch (type) {
-    case LOAD_CARDS_FROM_API + REQUEST:
+    case LOAD_USER_CARDS + REQUEST:
       return {
         ...state,
         loading: true,
-        loaded: false,
         error: null,
       };
-    case LOAD_CARDS_FROM_API + SUCCESS:
+    case LOAD_USER_CARDS + SUCCESS:
       return {
         ...state,
-        entities: arrToMap(response.articles, payload.searchPhrase),
+        entities: arrToMapUserCards(response.data),
         // entities: {lala: 'lala'},
         loading: false,
         loaded: true,
       };
-    case LOAD_CARDS_FROM_API + FAILURE:
+    case LOAD_USER_CARDS + FAILURE:
       return {
         ...state,
         loading: false,
         loaded: false,
         error,
       };
-     case DELETE_CARD_FROM_SOURCE:
-      // console.log('cards-from-api.js: state=', state);
-      
-      return {
-        ...state,
-        entities: deleteCard(state.entities, payload.article),
-        // loading: false,
-        // loaded: false,
-        error,
-        }; 
-
     // case ADD_REVIEW:
     //   return produce(state, (draft) => {
     //     draft.entities[payload.restaurantId].reviews.push(reviewId);

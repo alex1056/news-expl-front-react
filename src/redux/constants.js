@@ -14,6 +14,8 @@ export const MAKE_ORDER = 'MAKE_ORDER';
 export const LOAD_CARDS_FROM_API = 'LOAD_CARDS_FROM_API';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+export const LOAD_USER_CARDS = 'LOAD_USER_CARDS';
+export const DELETE_CARD_FROM_SOURCE = 'DELETE_CARD_FROM_SOURCE';
 
 
 //////////

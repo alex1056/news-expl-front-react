@@ -92,6 +92,7 @@ class LoginForm extends React.Component {
               setUserData('userData',{ isLoggedIn: true, userName: name });
               userContextSetState({ isLoggedIn: true, userName: name });
               this.setPopupActiveState(false);           
+              // setUserData('popupState', {active: false});
             })
           })
           .catch((err) => {
