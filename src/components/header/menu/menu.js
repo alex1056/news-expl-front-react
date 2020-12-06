@@ -12,20 +12,11 @@ const mainApi = new MainApi(URL_MAIN_API);
 
 
 
-function Menu( {setPopupActiveState, userData, colorProp}) {
+function Menu( {setPopupActiveState, userData, colorProp, mobileMenuActiveState}) {
   const { isLoggedIn } = userData;
   const { userContextSetState } = useContext(UserContext);
   // const [userName, userNameSetState] = useState(userData);
-  // console.log('menu.js, rest=', rest);
-
-useEffect(() => {
-  // userNameSetState(<UserContext.Consumer>{({ userData }) => `${userData.userName ? userData.userName : 'Авторизоваться'}`}
-  // </UserContext.Consumer>);
-  // const newUserName = <UserContext.Consumer>{({ userData }) => `${userData.userName ? userData.userName : 'Авторизоваться'}`}
-  //  </UserContext.Consumer>;
-  //  console.log('useEffect, userData=', userData);
-  //  console.log('useEffect, isLoggedIn=', isLoggedIn);
-})
+  // console.log('menu.js, mobileMenuActiveState=', mobileMenuActiveState);
 
 const handleAuthBtn = () => {
   if (isLoggedIn) 
@@ -53,18 +44,18 @@ const handleAuthBtn = () => {
   return ( 
             <ul className={styles['header__menu']}>
               <li className={styles['header__menu-item']}>
-              <NavLink exact to="/" activeClassName={styles['header__menu-item_selected']} className={cn(styles.link, styles['header__link'])}  
+              <NavLink exact to="/" activeClassName={cn({[styles['header__menu-item_selected']]: !mobileMenuActiveState})} className={cn(styles.link, styles['header__link'])}  
                   >Главная</NavLink> 
               </li>
               <li
                 className={cn(styles['header__menu-item'], { [styles['header__menu-item_disabled']]: !isLoggedIn})} >
-                <NavLink exact to="/articles" activeClassName={styles['header__menu-item_selected']} className={cn(styles.link, styles['header__link'])}  
+                <NavLink exact to="/articles" activeClassName={cn({[styles['header__menu-item_selected']]: !mobileMenuActiveState})} className={cn(styles.link, styles['header__link'])}  
                   >Сохраненные статьи</NavLink>    
               </li>
 
               
               <li onClick={()=>handleAuthBtn()}
-              className={cn(styles['header__menu-item'], styles['auth-btn'], styles['header__auth-btn'], { [styles['auth-btn_theme_dark']]: colorProp === 'dark'})} >
+              className={cn(styles['header__menu-item'], styles['auth-btn'], styles['header__auth-btn'], { [styles['auth-btn_theme_dark']]: colorProp === 'dark' && !mobileMenuActiveState})} >
                 <Link to="#" className={cn(styles.link, styles['header__link'])}>
                   <p className={styles['auth-btn__name-text']}>
                   {userData.userName}

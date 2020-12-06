@@ -1,5 +1,6 @@
 // import './header.css';
 // import styles from './not-found.module.css';
+import {useState} from 'react';
 import { NavLink, Link } from "react-router-dom";
 import imageSrc from '../../images/not-found-icon.svg'
 import cn from 'classnames';
@@ -12,7 +13,8 @@ import SearchWrapper from '../search-wrapper';
   function IndexPageWrapper(props) {
   // console.log('IndexPageWrapper, props=', props);
     const {setPopupActiveState, activePageState, setActivePageState} = props;
-  
+    // const [mobileMenuActiveState, setStateMobileMenuActive] = useState(false);
+
     useEffect(() => { 
       // loadUserCards();
       // if(activePageState !== 'indexPage') {

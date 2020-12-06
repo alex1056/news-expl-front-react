@@ -2,10 +2,14 @@ import styles from './header-mobile-icon.module.css';
 import Sandwich from '../sandwich';
 import Cross from '../cross';
 
-function HeaderMobileIcon({type}) {
+function HeaderMobileIcon({type, mobileMenuActiveState, setStateMobileMenuActive, colorProp}) {
+  
+  const typeLocal = !mobileMenuActiveState ? 'sandwich' : 'cross';
+  // console.log('HeaderMobileIcon, typeLocal=', typeLocal);
+
   return (
-  <div className={styles['header-mobile-icon']}>
-    {type === 'sandwich' ? <Sandwich /> : <Cross /> }  
+  <div onClick={()=>setStateMobileMenuActive(!mobileMenuActiveState)} className={styles['header-mobile-icon']}>
+    {typeLocal === 'sandwich' ? <Sandwich colorProp={colorProp} /> : <Cross /> }  
   </div>
    
   );

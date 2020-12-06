@@ -1,9 +1,9 @@
 import styles from './sandwich.module.css';
+import cn from 'classnames';
 
-
-function Sandwich() {
+function Sandwich({colorProp}) {
   return (
-  <div className={styles.sandwich}>
+  <div className={cn(styles['sandwich'], {[styles['sandwich_black']]: colorProp === 'dark'})}>
 
   </div>
    

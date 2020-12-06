@@ -30,7 +30,7 @@ function Article({...rest}) {
     return ( 
     <article data-id={_id || 'no-id'} className={styles['card-wrapper']}>
           <a href={link} target="_blank" className={cn(styles['card'], styles['card__link'])} >
-          <div className={styles['card__tag']}>
+          <div className={cn(styles['card__tag'], {[styles['card__tag_active']]: sourceData !== NEWS_API})}>
             <p className={cn(styles['card__notification-text'], styles['card__notification-text_tag'])}>
             {keyword}
             </p>

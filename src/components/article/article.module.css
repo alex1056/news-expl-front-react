@@ -142,12 +142,17 @@
   padding-right: 10px;
   margin-right: 5px;
   display: none;
+
   align-content: center;
   position: absolute;
   height: 40px;
   left: 24px;
   top: 24px;
   z-index: 2;
+}
+
+.card__tag_active {
+  display: flex;
 }
 
 @media screen and (max-width: 1439px) {

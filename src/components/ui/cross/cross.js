@@ -1,9 +1,10 @@
 import styles from './cross.module.css';
+import cn from 'classnames';
 
-
-function Cross() {
+function Cross({colorProp}) {
   return (
-  <div className={styles.cross}>
+  <div className={styles['cross']}>
+  
 
   </div>
    
