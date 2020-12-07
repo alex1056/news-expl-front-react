@@ -44,9 +44,7 @@ export default (state = initialState, action) => {
         loaded: false,
         error,
       };
-     case DELETE_CARD_FROM_SOURCE:
-      // console.log('cards-from-api.js: state=', state);
-      
+     case DELETE_CARD_FROM_SOURCE:      
       return {
         ...state,
         entities: deleteCard(state.entities, payload.article),

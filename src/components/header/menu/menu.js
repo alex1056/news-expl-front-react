@@ -24,7 +24,7 @@ const handleAuthBtn = () => {
       // alert('LogOut!');
       mainApi.logout()
       .then((res)=> {
-        console.log('Logout=',res);
+        // console.log('Logout=',res);
         sleep(500)
         .then(()=> {
         userContextSetState({ isLoggedIn: false, userName: 'Авторизоваться' });

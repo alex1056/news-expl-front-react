@@ -148,7 +148,7 @@
   height: 40px;
   left: 24px;
   top: 24px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .card__tag_active {
@@ -264,7 +264,7 @@
   top: 24px;
   display: flex;
   justify-content: flex-end;
-  z-index: 2;
+  z-index: 1;
 }
 
 @media screen and (max-width: 1439px) {

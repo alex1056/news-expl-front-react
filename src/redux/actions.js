@@ -33,6 +33,7 @@ export const loadCards = ({searchPhrase}) => {
 };
 
 export const deleteCardFromSource = (article) => {
+      // console.log('deleteCardFromSource, article=', article);
   return {
     type: DELETE_CARD_FROM_SOURCE,
     payload: article,  

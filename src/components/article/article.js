@@ -1,5 +1,6 @@
+import {UserContext} from '../../user-context/user-context';
 import {NEWS_API} from '../../constants';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import { connect } from 'react-redux';
 import { loadCards, loadUserCards, deleteCardFromSource } from '../../redux/actions';
 import { cardsFromApiUserCardsSelector, userCardsSelector, userCardsLoadingSelector, userCardsLoadedSelector } from '../../redux/selectors'; 
@@ -17,15 +18,16 @@ import MainApi from '../../api/main-api';
 const mainApi = new MainApi(URL_MAIN_API);
 
 
-
 function Article({...rest}) {
   const {loadUserCards, sourceData, loading, deleteCardFromSource } = rest;
   const articleObj = sourceData === NEWS_API ? convertData(rest.data) : rest.data;
   const {_id, link, keyword, image, date, title, text, source, userSaved} = articleObj;
-
+  const [promptState, setPromptState] = useState(false);
+  const { userContextState } = useContext(UserContext);
+  const handlePromptObj = {userContextState, promptState, setPromptState};
   // console.log('article.js, articleObj=', articleObj);
   // console.log('article.js, rest=', rest);
-
+// console.log('userContextState=', userContextState);
 
     return ( 
     <article data-id={_id || 'no-id'} className={styles['card-wrapper']}>
@@ -36,12 +38,12 @@ function Article({...rest}) {
             </p>
           </div>
           <div className={styles['card__save-article-container']}>
-          <div className={styles['card__notification']}>
+          <div className={cn(styles['card__notification'], {[styles['card__notification_enabled']]: promptState})}>
               <p className={styles['card__notification-text']}>
                 Войдите, чтобы сохранять статьи
               </p>
             </div>
-            <div onClick={(e)=>handleClick({e, articleObj, loadUserCards, userSaved, loading, sourceData, deleteCardFromSource})} 
+            <div onClick={(e)=>handleClick({e, articleObj, loadUserCards, userSaved, loading, sourceData, deleteCardFromSource, handlePromptObj})} 
             className={cn({[styles['card__remove-article-btn']]: sourceData !== NEWS_API}, {[styles['card__article-btn']]: sourceData === NEWS_API}, {[styles['card__save-article-btn_saved']]: userSaved && sourceData === NEWS_API})}>
             </div>
           </div>
@@ -67,9 +69,16 @@ function Article({...rest}) {
       );
     }
 
-    const handleClick = ({e, articleObj, loadUserCards, userSaved, loading, sourceData, deleteCardFromSource}) => {
+    const handleClick = ({e, articleObj, loadUserCards, userSaved, loading, sourceData, deleteCardFromSource, handlePromptObj}) => {
+      const {userContextState, promptState, setPromptState} = handlePromptObj;
       e.preventDefault();
-      
+
+      if(!userContextState.isLoggedIn) {
+        setPromptState(!promptState);
+        return;
+      }
+
+
       if (sourceData !== NEWS_API) {
         const { _id } = articleObj;
         mainApi.deleteArticle(_id)

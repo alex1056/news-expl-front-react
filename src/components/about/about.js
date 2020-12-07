@@ -37,7 +37,7 @@ function About({active = false}) {
           </ul>
 
         <p className={cn(styles['text'], styles['about__text'])}>
-        Frontend использует httpOnly cookie и корректная работа возможна в браузерах с поддержкой данной возможности.
+        Frontend использует httpOnly cookie и корректная работа возможна в браузерах с поддержкой данной опции.
         </p>
       </div>
     </div>

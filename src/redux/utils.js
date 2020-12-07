@@ -68,3 +68,28 @@ export const getById = (selector, defaultValue) =>
     return dateToWords(ms);
     
   }
+
+  export const keyWordsSummary = (originArray) => {
+    try {
+      return originArray.reduce((accum, item) => {
+        if (!accum[item.keyword]) accum[item.keyword] = 1;
+        else accum[item.keyword] += 1;
+        return accum;
+      }, {});
+    } catch (error) {
+      console.log('Не задан начальный массив для построения схемы по keyword');
+      return null;
+    }
+  }
+
+  export const sortOriginArray = (originArray) => {
+    const schemeObj = keyWordsSummary(originArray);
+    // console.log('schemeObj, schemeObj=', schemeObj);
+    let result;
+    const arr = Object.keys(schemeObj).sort((a, b) => {
+        result = schemeObj[b] - schemeObj[a];
+        return result;
+      });
+      // console.log('arr, arr=', arr);
+    return arr;
+  }

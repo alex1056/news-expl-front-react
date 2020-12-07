@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { createMatchSelector } from 'connected-react-router';
-import { getById } from './utils';
+import { getById, keyWordsSummary, sortOriginArray} from './utils';
 
 export const cardsFromApiSelector = (state) => state.cardsFromApi.entities;
 export const cardsFromApiLoadingSelector = (state) => state.cardsFromApi.loading;
@@ -21,26 +21,43 @@ export const cardsFromApiUserCardsSelector = createSelector(
   cardsFromApiSelector,
   userCardsSelector,
   (cardsFromApi, userCards) => {
-    // Object.entries(order).map(([id, amount]) => ({ id, amount }))
-    // console.log('selectros.js, Object.keys(cardsFromApiSelector)=', Object.keys(cardsFromApi));
+    
     Object.keys(userCards)
     .forEach((item) => { 
       if(cardsFromApi[item]) {
-        // const newCard = {...cardsFromApi[item], userSaved: true};
-        // return { ...cardsFromApi,  newCard }
         return cardsFromApi[item] = {...cardsFromApi[item], userSaved: true};
       }
     } 
     )
-    // console.log('selectros.js, cardsFromApi=', cardsFromApi);
-    // console.log('selectros.js, userCards=', userCards);
     return cardsFromApi;
-  /*  {
-    ...review,
-    user: users[review.userId] ?.name,
-  } */
 }
 );
+
+
+export const userCardsSummarySelector = createSelector(
+  userCardsSelector,
+  (userCards) => {
+    const originArray = Object.keys(userCards).map((item) => userCards[item]);
+    const resultArr = sortOriginArray(originArray);
+    const resultObj = {totalNumber: null, keyword1: null, keyword2: null, onotherWordsNumber: null};
+
+    if (resultArr.length) {
+      resultObj.totalNumber = originArray.length;
+      resultObj.keyword1 = resultArr[0];
+      if (resultArr[1]) {
+        resultObj.keyword2 = resultArr[1];
+      }
+      if (resultArr.length - 2 > 0) {
+        resultObj.anotherWordsNumber = resultArr.length - 2;
+      } 
+    }
+    // console.log('selectors.js, resultArr=', resultArr);
+    // console.log('selectors.js, resultObj=', resultObj);
+    return resultObj;
+}
+);
+
+
 
 /*
 const restaurantsSelector = (state) => state.restaurants.entities;
