@@ -55,11 +55,18 @@
   }
 }
 
-.header__menu-item_selected {
+.navLinkActive {
   border-bottom: 3px solid currentColor;
   box-sizing: border-box;
-  padding-top: 21px;
-  height: 66px;
+  padding-top: 28px;
+  height: 80px;
+}
+
+@media screen and (max-width: 1439px) {
+  .navLinkActive {
+    padding-top: 21px;
+    height: 66px;
+  }
 }
 
 .header__menu-item.header__menu-item_disabled {

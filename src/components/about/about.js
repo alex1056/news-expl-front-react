@@ -1,17 +1,8 @@
-// import './header.css';
 import styles from './about.module.css';
 import { NavLink, Link } from "react-router-dom";
 import imageBigSrc from '../../images/ab-1000.png';
 import imageSmallSrc from '../../images/ab-500.png';
 import cn from 'classnames';
-// import stylesContentTitle from '../../library.blocks/content-title/content-title.module.css';
-// import stylesContentTitle from './contenttitle.module.css';
-// import stylesText from '../../library.blocks/text/text.module.css';
-// import '../../library.blocks/content-title/content-title.css';
-
-// const styles = {...stylesAbout, ...stylesContentTitle, ...stylesText }
-// const stylesGlobal = cn({stylesContentTitle}, {stylesText});
-// const stylesGlobal = stylesContentTitle;
 
 function About({active = false}) {
   return ( 
@@ -33,17 +24,20 @@ function About({active = false}) {
         </picture>
       </div>
       <div className={styles['about__text-container']}>
-      {/* {console.log('styles:',styles)} */}
-        {/* <h3 className={cn(styles['content-title'], styles['about__content-title'])}>Об авторе</h3> */}
-        <h3 className={cn(styles['content-title'], styles['about__content-title'])}>Об авторе</h3>
+        <h3 className={cn(styles['content-title'], styles['about__content-title'])}>О проекте</h3>
         <p className={cn(styles['text'], styles['about__text'])}>
-          Это блок с описанием автора проекта. Здесь следует указать, как
-          вас зовут, чем вы занимаетесь, какими технологиями разработки
-          владеете.
+        Поиск новостей по ключевому слову с возможностью сохранения понравившихся.
         </p>
         <p className={cn(styles['text'], styles['about__text'])}>
-          Также можно рассказать о процессе обучения в Практикуме, чему вы
-          тут научились, и чем можете помочь потенциальным заказчикам.
+        Технологии
+        </p>
+        <ul className={cn(styles['text'], styles['about__text'], styles['about__text_ul'])}>
+          <li className={cn(styles['text'], styles['about__text'], styles['about__text_li'])}>Frontend: React, Redux</li>
+          <li className={cn(styles['text'], styles['about__text'], styles['about__text_li'])}>Backend: Express, MongoDb</li>
+          </ul>
+
+        <p className={cn(styles['text'], styles['about__text'])}>
+        Frontend использует httpOnly cookie и корректная работа возможна в браузерах с поддержкой данной возможности.
         </p>
       </div>
     </div>

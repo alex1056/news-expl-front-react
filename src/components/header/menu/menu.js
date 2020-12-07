@@ -44,15 +44,14 @@ const handleAuthBtn = () => {
   return ( 
             <ul className={styles['header__menu']}>
               <li className={styles['header__menu-item']}>
-              <NavLink exact to="/" activeClassName={cn({[styles['header__menu-item_selected']]: !mobileMenuActiveState})} className={cn(styles.link, styles['header__link'])}  
+              <NavLink exact to="/" activeClassName={cn({[styles['navLinkActive']]: !mobileMenuActiveState})} className={cn(styles.link, styles['header__link'])}  
                   >Главная</NavLink> 
               </li>
               <li
                 className={cn(styles['header__menu-item'], { [styles['header__menu-item_disabled']]: !isLoggedIn})} >
-                <NavLink exact to="/articles" activeClassName={cn({[styles['header__menu-item_selected']]: !mobileMenuActiveState})} className={cn(styles.link, styles['header__link'])}  
+                <NavLink exact to="/articles" activeClassName={cn({[styles['navLinkActive']]: !mobileMenuActiveState})} className={cn(styles.link, styles['header__link'])}  
                   >Сохраненные статьи</NavLink>    
               </li>
-
               
               <li onClick={()=>handleAuthBtn()}
               className={cn(styles['header__menu-item'], styles['auth-btn'], styles['header__auth-btn'], { [styles['auth-btn_theme_dark']]: colorProp === 'dark' && !mobileMenuActiveState})} >
